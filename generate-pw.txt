@@ -1,0 +1,1 @@
+Input -> base64 -> sha256 -> reverse

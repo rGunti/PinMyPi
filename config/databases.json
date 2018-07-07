@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "pinmypi",
+    "password": "pinmypi",
+    "database": "pinmypi",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "pinmypi",
+    "password": "pinmypi",
+    "database": "pinmypi",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "pinmypi",
+    "password": "pinmypi",
+    "database": "pinmypi",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
