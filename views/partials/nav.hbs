@@ -18,10 +18,12 @@
     <div class="collapse navbar-collapse"
          id="navbarCollapse">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            {{#isLoggedIn}}
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{ROOT_DIR}}/entry">Entry</a>
+                   href="{{ROOT_DIR}}/devices">Devices</a>
             </li>
+            {{/isLoggedIn}}
         </ul>
         <ul class="navbar-nav">
             {{#isLoggedIn}}
