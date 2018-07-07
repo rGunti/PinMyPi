@@ -19,10 +19,15 @@ db.sequelize.authenticate()
 
         // Test a database call
         const sequelize = require('sequelize');
-        const mUser = require('./db/models/user')(db.sequelize, sequelize);
-        mUser.findAll()
+        const MUser = db.User;
+        MUser.findAll()
             .then((users) => {
                 debug('Found %s registered users', users.length);
+            })
+            .catch((err) => {
+                const msg = "WARNING: Failed to fetch number of registered users. This might cause problems later when data is requested from the database.";
+                debug(msg);
+                console.error(msg);
             });
     })
     .catch((err) => {
@@ -50,7 +55,14 @@ app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('cookie-parser')());
+app.use(require('express-session')({ secret: config.get('session.secret'), resave: false, saveUninitialized: false }));
 app.enable('trust proxy');
+
+debug('Setting up authentication...');
+const auth = require('./auth');
+app.use(auth.initialize());
+app.use(auth.session());
+app.use(auth.authenticate('remember-me'));
 
 const rootDir = config.has('server.rootDir') ? config.get('server.rootDir') : '';
 if (rootDir) {

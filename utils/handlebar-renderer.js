@@ -3,9 +3,10 @@ const config = require('config');
 const HandlebarHelpers = require('./handlebar-helpers');
 
 const HandlebarRenderer = {
-    render: (res, view, title, data, callback) => {
+    render: (res, view, title, data, layout, callback) => {
         res.render(view, {
             title: title,
+            layout: layout || 'default',
             utils: HandlebarHelpers,
             data: data,
             request: res.req,

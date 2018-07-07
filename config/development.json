@@ -3,5 +3,14 @@
         "enableDebugRoutes": true,
         "showTraces": true,
         "rootDir": ""
+    },
+    "session": {
+        "secret": "regoiujhdjhnfsewdrhunjieswagbgoquöiboujiöesgrbouöjsedgrböoj"
+    },
+    "auth": {
+        "rememberMe": {
+            "enabled": true,
+            "maxAge": 604800000
+        }
     }
 }
