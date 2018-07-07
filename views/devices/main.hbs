@@ -5,11 +5,34 @@
             {{#each data.devices}}
             <tr>
                 <td>{{this.name}}</td>
-                <td>
-
+                <td class="text-right">
+                    <a href="{{ROOT_DIR}}/devices/{{this.id}}"
+                       title="Edit Device"
+                       class="btn btn-primary">
+                       <i class="fa fa-fw fa-pencil"></i>
+                    </a>
+                    <a href="{{ROOT_DIR}}/devices/{{this.id}}/delete"
+                       title="Delete Device"
+                       class="btn btn-danger">
+                       <i class="fa fa-fw fa-trash"></i>
+                    </a>
                 </td>
             </tr>
             {{/each}}
+            <tr class="table-active">
+                <td colspan="2" class="text-center">
+                    {{data.deviceCount}} device(s) registered
+                </td>
+            </tr>
+            <tr class="table-active">
+                <td colspan="2" class="text-center">
+                    <a href="{{ROOT_DIR}}/devices/new"
+                       title="Register new device"
+                       class="btn btn-success">
+                       Register new device
+                    </a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
