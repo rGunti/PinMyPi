@@ -1,0 +1,7 @@
+{
+    "server": {
+        "enableDebugRoutes": true,
+        "showTraces": true,
+        "rootDir": ""
+    }
+}

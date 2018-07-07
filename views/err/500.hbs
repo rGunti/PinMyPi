@@ -1,0 +1,65 @@
+<div class="container text-center">
+    <h3 class="display-2"><i class="fa fa-bug" aria-hidden="true"></i></h3>
+    <h3 class="display-3">Uh oh..</h3>
+    <p class="lead">
+        Something went terribly wrong on our part. Does someone have bug spray?
+    </p>
+
+    <h4><a href="#errorInfoCollapse"
+           data-toggle="collapse"
+           aria-expanded="false"
+           aria-controls="errorInfoCollapse">
+        What went wrong?</a></h4>
+    <div class="collapse text-left" id="errorInfoCollapse">
+        <div class="card border-danger mb-3">
+            <div class="card-header">
+                <b>Error Detail</b>
+            </div>
+            <div class="card-body">
+                <p>Here is some technical information that a developer might need to fix that bug:</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Message</dt>
+                    <dd class="col-sm-9">{{data.message}}</dd>
+
+                    <dt class="col-sm-3">Requested URL</dt>
+                    <dd class="col-sm-9"><code>{{data.requestedUrl}}</code></dd>
+
+                    <dt class="col-sm-3">Date / Time</dt>
+                    <dd class="col-sm-9">{{data.timestamp}}</dd>
+
+                    <dt class="col-sm-3">Stack Trace</dt>
+                    <dd class="col-sm-9">
+                        {{#if data.trace}}
+                            <pre>{{{data.trace}}}</pre>
+                        {{else}}
+                            No trace available
+                        {{/if}}
+                    </dd>
+                </dl>
+                <div class="text-right">
+                    <a href="#" class="copy-exception-json">Copy exception detail</a><br>
+                    <textarea class="hidden exception-json">{{JSONstringify data}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Steps to take</h4>
+    <p>
+        Here are some options for you on what to do now:
+    </p>
+    <ul class="list-unstyled">
+        <li>Go <a href="javascript:history.back()">back to the previous page</a></li>
+        <li>Go to the <a href="{{ROOT_DIR}}/">Home Page</a></li>
+        <li>
+            Go on <a href="http://github.com/rgunti">GitHub</a> (or <a href="http://twitter.com/rgunti">Twitter</a>)
+            and send the developer a bug report using the
+            <a href="#errorInfoCollapse" data-toggle="collapse">information above</a>.
+        </li>
+        <li><s>
+            Rant on Twitter about the developer not being able to write bug-free code.
+        </s> <small>
+            (please don't do that one)
+        </small></li>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+<div class="container text-center">
+    <h3 class="display-2"><i class="fa fa-question-circle" aria-hidden="true"></i></h3>
+    <h3 class="display-3">Page not found</h3>
+    <p class="lead">
+        Sorry, but we could not find <code>{{data.requestedUrl}}</code>.
+    </p>
+
+    <h4>Steps to take</h4>
+    <p>
+        Since this page doesn't technically exist you can't do anything. But here are some options to do for you:
+    </p>
+    <ul class="list-unstyled">
+        <li>Go <a href="javascript:history.back()">back to the previous page</a></li>
+        <li>Go to the <a href="{{ROOT_DIR}}/">Home Page</a></li>
+        <li><s>
+            Rant on Twitter about the developer not being able to provide you "<i>{{data.requestedUrl}}</i>"
+        </s></li>
+    </ul>
+</div>
