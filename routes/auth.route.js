@@ -38,10 +38,20 @@ router.post('/login',
     });
 
 router.get('/logout', (req, res, next) => {
+    RememberMeAuthentication.consumeToken(req.cookies['rememberMe']);
     res.clearCookie('rememberMe');
     req.logout();
     res.redirect(RouteUtils.getRoute('/'));
 });
+
+if (config.has('server.enableDebugRoutes') && config.get('server.enableDebugRoutes')) {
+    debug('Debug Routes have been enabled!');
+    router.get('/debug.rememberme', (req, res, next) => {
+        HandleRender.render(res, 'debug/loginTokens', '[DEBUG] Remember Me Tokens', {
+            tokens: RememberMeAuthentication._getAllTokens()
+        });
+    });
+}
 
 module.exports = {
     baseUri: "/auth",

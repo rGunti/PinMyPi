@@ -16,11 +16,13 @@
            class="form-control"
            placeholder="Password"
            required>
+    {{#ifConfig 'auth.rememberMe.enabled'}}
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" value="rememberMe"> Remember me
+            <input type="checkbox" name="rememberMe" value="rememberMe"> Remember me
         </label>
     </div>
+    {{/ifConfig}}
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; {{currentYear}}, rGunti</p>
 </form>

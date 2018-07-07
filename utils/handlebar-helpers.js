@@ -31,6 +31,10 @@ const HandlebarHelpers = {
         getConfig: (o) => {
             return config.get(o);
         },
+        ifConfig: (configKey, options) => {
+            if (config.get(configKey)) return options.fn(this);
+            return options.inverse(this);
+        },
         isLoggedIn: (options) => {
             var fnTrue = options.fn,
                 fnFalse = options.inverse,

@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>[DEBUG] Remember Me Tokens</h1>
+
+    {{#ifConfig 'auth.rememberMe.enabled'}}
+    {{else}}
+    <div class="alert alert-warning" role="alert">
+        <b>Disabled!</b> "Remember Me" has been disabled!
+    </div>
+    {{/ifConfig}}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Token</th>
+                <th>User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data.tokens}}
+            <tr>
+                <td>{{this.token}}</td>
+                <td>{{this.userId}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
