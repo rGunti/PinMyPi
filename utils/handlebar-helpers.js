@@ -30,6 +30,16 @@ const HandlebarHelpers = {
         currentYear: () => new Date().getFullYear(),
         getConfig: (o) => {
             return config.get(o);
+        },
+        isLoggedIn: (options) => {
+            var fnTrue = options.fn,
+                fnFalse = options.inverse,
+                data = options.data.root;
+            
+            return (data.user) ? fnTrue(this) : fnFalse(this);
+        },
+        userData: (attrib, options) => {
+            return options.data.root.user[attrib];
         }
     },
     roundNumber: (num, decimals) => {

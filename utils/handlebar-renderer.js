@@ -10,6 +10,7 @@ const HandlebarRenderer = {
             utils: HandlebarHelpers,
             data: data,
             request: res.req,
+            user: res.req.user,
             ROOT_DIR: config.has('server.rootDir') ? config.get('server.rootDir') : "/"
         }, callback);
     }

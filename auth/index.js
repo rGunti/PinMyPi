@@ -77,7 +77,7 @@ passport.deserializeUser((id, done) => {
     debug('Fetching user data for UserID=%s ...', id);
     MUser.findOne({
         where: { id: id },
-        plain: true
+        raw: true
     }).then((user) => {
         if (!user) return done(null, false);
         return done(null, user);
