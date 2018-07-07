@@ -74,6 +74,8 @@ const staticRoutes = [
     ['/public/js', './node_modules/jquery/dist'],
     ['/public/js', './node_modules/moment/min/'],
     ['/public/js', './node_modules/moment-duration-format/lib/'],
+    ['/public/css', './node_modules/font-awesome/css/'],
+    ['/public/fonts', './node_modules/font-awesome/fonts/'],
     ['/public', './public'],
 ];
 for (let route of staticRoutes) {
