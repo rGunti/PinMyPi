@@ -1,0 +1,7 @@
+.hidden {
+    display: none;
+}
+.container:first-of-type,
+.container-fluid:first-of-type {
+    padding-top: 20px;
+}

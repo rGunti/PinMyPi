@@ -14,6 +14,7 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login',
     auth.authenticate('local', {
+        successReturnToOrRedirect: RouteUtils.getRoute("/"),
         failureRedirect: RouteUtils.getRoute('/auth/login'),
         failureFlash: true
     }),
