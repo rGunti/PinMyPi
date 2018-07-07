@@ -32,14 +32,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('cookie-parser')());
 app.enable('trust proxy');
 
+const rootDir = config.has('server.rootDir') ? config.get('server.rootDir') : '';
+if (rootDir) {
+    debug('Routes will be setup with base/root route %s', rootDir);
+}
+
 const staticRoutes = [
     ['/public', './node_modules/bootstrap/dist'],
     ['/public/js', './node_modules/jquery/dist'],
+    ['/public/js', './node_modules/moment/min/'],
+    ['/public/js', './node_modules/moment-duration-format/lib/'],
     ['/public', './public'],
 ];
 for (let route of staticRoutes) {
     debug('Loading Static Route %s ...', route[0]);
-    app.use(route[0], express.static(path.join(__dirname, route[1])));
+    app.use(rootDir + route[0], express.static(path.join(__dirname, route[1])));
 }
 
 // Include all routes (js files ending with *.route.js)
@@ -47,7 +54,7 @@ fs.readdirSync(path.join(__dirname, 'routes')).forEach(f => {
     if (f.endsWith('.route.js')) {
         debug('Loading Route %s ...', f);
         const routeInfo = require('./routes/' + f);
-        app.use(routeInfo.baseUri, routeInfo.handler);
+        app.use(rootDir + routeInfo.baseUri, routeInfo.handler);
     }
 });
 
