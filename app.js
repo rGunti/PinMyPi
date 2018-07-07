@@ -6,7 +6,6 @@ debug('Starting up PinMyPi web service...');
 
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const hbs = require('express-hbs');
 const fs = require('fs');
@@ -17,6 +16,14 @@ debug('Connecting to database ...');
 db.sequelize.authenticate()
     .then(() => {
         debug('Database connected!');
+
+        // Test a database call
+        const sequelize = require('sequelize');
+        const mUser = require('./db/models/user')(db.sequelize, sequelize);
+        mUser.findAll()
+            .then((users) => {
+                debug('Found %s registered users', users.length);
+            });
     })
     .catch((err) => {
         debug('Database connection failed!');
