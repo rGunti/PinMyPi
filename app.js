@@ -11,6 +11,19 @@ const bodyParser = require('body-parser');
 const hbs = require('express-hbs');
 const fs = require('fs');
 
+// Test database connection
+const db = require('./db/models');
+debug('Connecting to database ...');
+db.sequelize.authenticate()
+    .then(() => {
+        debug('Database connected!');
+    })
+    .catch((err) => {
+        debug('Database connection failed!');
+        console.error(err);
+        require('sys').exit(1000);
+    });
+
 const app = express();
 
 // View Engine

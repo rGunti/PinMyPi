@@ -10,7 +10,7 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}/www.js",
             "env": {
-                "NODE_ENV": "dev",
+                "NODE_ENV": "development",
                 "DEBUG": "PinMyPi:*"
             },
             "console": "integratedTerminal"
