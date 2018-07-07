@@ -1,0 +1,39 @@
+{
+  "name": "pinmypi",
+  "version": "1.0.0",
+  "description": "PinMyPi is a web service that receives GPS locations and lists them, similar to \"Find My iPhone\", but for your Raspberry Pis (and anything else you want).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "repository": "https://github.com/rGunti/PinMyPi.git",
+  "keywords": [
+    "pinmypi",
+    "gps",
+    "raspberry",
+    "pi"
+  ],
+  "author": {
+    "name": "Raphael \"rGunti\" Guntersweiler",
+    "email": "raphael@rgunti.ch",
+    "url": "https://rgunti.ch"
+  },
+  "license": "MIT",
+  "bugs": "https://github.com/rGunti/PinMyPi/issues",
+  "homepage": "https://github.com/rGunti/PinMyPi#readme",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "bootstrap": "4.1.1",
+    "cookie-parser": "1.4.3",
+    "debug": "3.1.0",
+    "express": "4.16.3",
+    "express-hbs": "1.0.4",
+    "font-awesome": "4.7.0",
+    "moment": "2.22.2",
+    "moment-duration-format": "2.2.2",
+    "morgan": "1.9.0",
+    "sequelize": "4.38.0",
+    "serve-favicon": "2.5.0"
+  }
+}
