@@ -7,16 +7,18 @@
                 <tr>
                     <td>{{this.name}}</td>
                     <td class="text-right">
-                        <a href="{{ROOT_DIR}}/devices/{{this.id}}"
-                        title="Edit Device"
-                        class="btn btn-primary">
-                        <i class="fa fa-fw fa-pencil"></i>
-                        </a>
-                        <a href="{{ROOT_DIR}}/devices/{{this.id}}/delete"
-                        title="Delete Device"
-                        class="btn btn-danger">
-                        <i class="fa fa-fw fa-trash"></i>
-                        </a>
+                        <div class="btn-group" role="group">
+                            <a href="{{ROOT_DIR}}/devices/{{this.id}}"
+                               title="Edit Device"
+                               class="btn btn-primary">
+                                <i class="fa fa-fw fa-pencil"></i>
+                            </a>
+                            <a href="{{ROOT_DIR}}/devices/{{this.id}}/delete"
+                               title="Delete Device"
+                               class="btn btn-danger">
+                                <i class="fa fa-fw fa-trash"></i>
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 {{/each}}
