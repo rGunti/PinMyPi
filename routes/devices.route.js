@@ -27,6 +27,42 @@ router.get('/',
         });
     });
 
+router.get('/new',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        return HandleRender.render(res, 'devices/edit', 'Register new device', {
+            device: {
+                id: null,
+                name: '',
+                key: null,
+                createdAt: null,
+                modifiedAt: null
+            }
+        });
+    });
+
+// GET /devices/123
+//router.get(/\/\d.$/,
+router.get('/:deviceId',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        Device.findOne({
+            where: {
+                owner_id: req.user.id,
+                id: req.params.deviceId
+            },
+            raw: true
+        }).then((device) => {
+            if (device) {
+                return HandleRender.render(res, 'devices/edit', `Edit device: ${device.name}`, {
+                    device: device
+                });
+            } else {
+                next(); // 404
+            }
+        });
+    });
+
 module.exports = {
     baseUri: "/devices",
     handler: router

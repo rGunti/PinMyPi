@@ -1,0 +1,96 @@
+<div class="container">
+    {{#if data.device.id}}
+    <h2>Edit Device <small>{{data.device.name}}</small></h2>
+    {{else}}
+    <h2>Register Device</h2>
+    {{/if}}
+
+    <form action="{{ROOT_DIR}}/devices/{{data.device.id}}" method="POST">
+    <div class="form-group">
+        <label for="deviceName">Device Name</label>
+        <input type="text" 
+               class="form-control"
+               id="deviceName"
+               name="device.name"
+               value="{{data.device.name}}">
+        <small class="form-text text-muted">
+            Enter a name for the device. Such a name could be it's name, make, model or a description of its purpose.
+        </small>
+    </div>
+    {{#if data.device.id}}
+    <div class="form-group">
+        <label for="deviceKey">Device Key</label>
+        <div class="input-group">
+            <input type="password" id="deviceKey" class="form-control" value="{{data.device.key}}" readonly>
+            <div class="input-group-append">
+                <button class="btn btn-outline-danger" id="showApiKeyButton" type="button" data-toggle="button" aria-pressed="false">
+                    <span class="fa fa-fw fa-eye"></span>
+                </button>
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#resetDeviceKeyModal">
+                    <span class="fa fa-fw fa-refresh"></span>
+                </button>
+            </div>
+        </div>
+        <small class="form-text text-danger">
+            <span class="fa fa-fw fa-exclamation-triangle"></span>
+            <b>WARNING!</b>
+            Please ensure, that no one except you can see the API key in clear, as it can give them access to your data!
+        </small>
+    </div>
+    <div class="form-group">
+        <dl class="row">
+            <dt class="col-sm-3">Device created at</dt>
+            <dd class="col-sm-9">{{data.device.createdAt}}</dd>
+            
+            <dt class="col-sm-3">Last updated at</dt>
+            <dd class="col-sm-9">{{data.device.updatedAt}}</dd>
+        </dl>
+    </div>
+    {{/if}}
+    <div class="form-group text-right">
+        <a href="{{ROOT_DIR}}/devices"
+           class="btn btn-default">
+            <span class="fa fa-fw fa-chevron-left"></span>
+            Cancel
+        </a>
+        <button class="btn btn-primary" type="submit">
+            <span class="fa fa-fw fa-save"></span>
+            Save
+        </button>
+    </div>
+    </form>
+
+    <pre>{{pprint2JSON data}}</pre>
+</div>
+
+<div class="modal fade" id="resetDeviceKeyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Device Key</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert">
+                    <span class="fa fa-fw fa-exclamation-triangle"></span>
+                    <b>WARNING!</b>
+                    Resetting a device key can make it non-functional. Always make sure you are able
+                    to adjust the key on your device before resetting it.
+                </div>
+                <p>
+                    Would you like to reset the device key of "<i>{{data.device.name}}</i>"?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger">
+                    <b>Yes, reset device key</b>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ROOT_DIR}}/public/js/deviceinfo.js"></script>

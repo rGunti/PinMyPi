@@ -44,6 +44,12 @@ const HandlebarHelpers = {
         },
         userData: (attrib, options) => {
             return options.data.root.user[attrib];
+        },
+        print2JSON: (obj, options) => {
+            return JSON.stringify(obj);
+        },
+        pprint2JSON: (obj, options) => {
+            return JSON.stringify(obj, null, '   ');
         }
     },
     roundNumber: (num, decimals) => {
