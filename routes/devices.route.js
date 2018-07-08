@@ -175,6 +175,56 @@ router.post('/:deviceId/delete',
         });
     });
 
+router.post('/:deviceId/resetKey.ajax',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        const apiKey = req.body.apiKey;
+        if (!apiKey) {
+            res.status(400);
+            return res.json({
+                ok: false,
+                reason: 'Missing API key'
+            });
+        }
+
+        Device.findOne({
+            where: {
+                owner_id: req.user.id,
+                id: req.params.deviceId,
+                key: apiKey
+            }
+        }).then((device) => {
+            if (device) {
+                device.key = Utils.randomString(64);
+                device.save()
+                    .then(() => {
+                        return res.json({
+                            ok: true
+                        });
+                    })
+                    .catch(() => {
+                        res.status(500);
+                        return res.json({
+                            ok: false,
+                            reason: 'Server Error while saving'
+                        });
+                    });
+            } else {
+                res.status(404);
+                return res.json({
+                    ok: false,
+                    reason: 'Device not found. Correct ID, ownership and API key?'
+                });
+            }
+        }).catch((err) => {
+            res.status(500);
+            return res.json({
+                ok: false,
+                reason: 'Server Error'
+            });
+        });
+    });
+
 module.exports = {
     baseUri: "/devices",
     handler: router
