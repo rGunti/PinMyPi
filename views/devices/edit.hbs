@@ -5,7 +5,15 @@
     <h2>Register Device</h2>
     {{/if}}
 
-    <form action="{{ROOT_DIR}}/devices/{{data.device.id}}" method="POST">
+    {{#if data.error}}
+    {{> error message=data.error}}
+    {{/if}}
+
+    {{#if data.success}}
+    {{> success message=data.success}}
+    {{/if}}
+
+    <form action="{{ROOT_DIR}}/devices/{{printOrElse data.device.id 'new'}}" method="POST">
     <div class="form-group">
         <label for="deviceName">Device Name</label>
         <input type="text" 
@@ -59,8 +67,6 @@
         </button>
     </div>
     </form>
-
-    <pre>{{pprint2JSON data}}</pre>
 </div>
 
 <div class="modal fade" id="resetDeviceKeyModal" tabindex="-1" role="dialog">

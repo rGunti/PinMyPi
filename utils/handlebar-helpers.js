@@ -50,6 +50,9 @@ const HandlebarHelpers = {
         },
         pprint2JSON: (obj, options) => {
             return JSON.stringify(obj, null, '   ');
+        },
+        printOrElse: (obj, defaultValue, options) => {
+            return obj || defaultValue;
         }
     },
     roundNumber: (num, decimals) => {

@@ -27,6 +27,20 @@ router.get('/',
         });
     });
 
+const successMessages = {
+    '1': 'Your changes have been saved successfully.',
+    '2': 'Your device key has been reset successfully. Please reconfigure your device to use this key.',
+    '3': 'Your device has been created.'
+};
+
+const renderDeviceScreen = (req, res, title, device, err) => {
+    return HandleRender.render(res, 'devices/edit', title, {
+        device: device,
+        error: err,
+        success: (req.query.success) ? successMessages[req.query.success] : null
+    });
+};
+
 router.get('/new',
     ensureLoggedIn(),
     (req, res, next) => {
@@ -54,8 +68,65 @@ router.get('/:deviceId',
             raw: true
         }).then((device) => {
             if (device) {
-                return HandleRender.render(res, 'devices/edit', `Edit device: ${device.name}`, {
-                    device: device
+                return renderDeviceScreen(req, res, `Edit device: ${device.name}`, device);
+            } else {
+                next(); // 404
+            }
+        });
+    });
+
+router.post('/new',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        let device = Device.build({
+            name: req.body['device.name'] || null,
+            owner_id: req.user.id,
+            key: Utils.randomString(64)
+        });
+        
+        if (!device.name) {
+            return renderDeviceScreen(req, res, 'Register new device', device,
+                'Your device name must not be empty.');
+        }
+        
+        device.save()
+            .then((d) => {
+                return res.redirect(RouteUtils.getRoute(`/devices/${d.id}?success=3`));
+            })
+            .catch((err) => {
+                debug("Failed to save Device %s", device.id);
+                console.error(err);
+                return renderDeviceScreen(req, res, 'Register new device', device,
+                    'An error occurred while creating the device. Please try again later.');
+            });
+    });
+
+router.post('/:deviceId',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        Device.findOne({
+            where: {
+                owner_id: req.user.id,
+                id: req.params.deviceId
+            }
+        }).then((device) => {
+            if (device) {
+                device.name = req.body['device.name'] || null;
+
+                if (!device.name) {
+                    return renderDeviceScreen(req, res, `Edit device: ${device.name}`, device,
+                        'Your device name must not be empty.');
+                }
+
+                device.save()
+                    .then(() => {
+                        return res.redirect(RouteUtils.getRoute(`/devices/${device.id}?success=1`));
+                    })
+                    .catch((err) => {
+                        debug("Failed to save Device %s", device.id);
+                        console.error(err);
+                        return renderDeviceScreen(req, res, `Edit device: ${device.name}`, device,
+                            'An error occurred while saving your changes. Please try again later.');
                 });
             } else {
                 next(); // 404
