@@ -134,6 +134,47 @@ router.post('/:deviceId',
         });
     });
 
+router.get('/:deviceId/delete',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        Device.findOne({
+            where: {
+                owner_id: req.user.id,
+                id: req.params.deviceId
+            },
+            raw: true
+        }).then((device) => {
+            if (device) {
+                return HandleRender.render(res, 'devices/delete', `Delete device "${device.name}"`, {
+                    device: device
+                });
+            } else {
+                next(); // 404
+            }
+        });
+    });
+
+router.post('/:deviceId/delete',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        Device.findOne({
+            where: {
+                owner_id: req.user.id,
+                id: req.params.deviceId
+            }
+        }).then((device) => {
+            if (device) {
+                // TODO: Delete all associated data with the device
+                device.destroy()
+                    .then(() => {
+                        res.redirect(RouteUtils.getRoute('/devices'));
+                    });
+            } else {
+                next(); // 404
+            }
+        });
+    });
+
 module.exports = {
     baseUri: "/devices",
     handler: router

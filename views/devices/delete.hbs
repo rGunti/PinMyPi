@@ -1,0 +1,71 @@
+<div class="container">
+    <h2>Delete Device <small>{{data.device.name}}</small></h2>
+
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-fw fa-exclamation-triangle"></span>
+        <b>WARNING!</b>
+        This process is irreversible!
+    </div>
+
+    <p>
+        Deleting your device results in the device "<i>{{data.device.name}}</i>" key being deleted. 
+        As a result, <b>your device will no longer be able to report its location</b> and other data.
+        Furthermore, <b>all associated device information</b>, like recorded tracks, <b>are delete permanently
+        as well</b>.
+    </p>
+    <p>
+        If you ment to <b>regenerate your device key</b>, <a href="{{ROOT_DIR}}/devices/{{data.device.id}}">click here</a>.
+    </p>
+    <hr>
+    <p class="lead">
+        <b>Are you sure, you want to delete your device and all its data from your account?</b>
+    </p>
+    <hr>
+    <div class="container-fluid text-right">
+        <a href="{{ROOT_DIR}}/devices"
+           class="btn btn-secondary">
+            <span class="fa fa-fw fa-times"></span>
+            No
+        </a>
+        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteDeviceConfirmModal">
+            <span class="fa fa-fw fa-trash"></span>
+            Yes, delete the device and all its data
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteDeviceConfirmModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm, that you are sure about it!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="lead text-danger">
+                    <b>This process is irreversible! Let me ask you again:</b>
+                </p>
+                <p>
+                    <b>Are you sure, you want to delete your device "<i>{{data.device.name}}</i>"
+                    and all its associated data from your account?</b>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ROOT_DIR}}/devices" class="btn btn-outline-secondary">
+                    <span class="fa fa-fw fa-times"></span>
+                    No, I changed my mind.
+                </a>
+                <form action="{{ROOT_DIR}}/devices/{{data.device.id}}/delete" method="POST">
+                    <button type="submit" class="btn btn-danger" disabled id="deleteDeviceConfirmButton">
+                        <span class="fa fa-fw fa-trash"></span>
+                        <b>Yes, I am sure! Shread it!</b>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ROOT_DIR}}/public/js/deletedevice.js"></script>
