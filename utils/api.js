@@ -33,7 +33,7 @@ const ApiUtils = {
         NotAcceptable: 406,
         Timeout: 408,
         Gone: 410,
-        Teapod: 418,
+        Teapot: 418,
         Locked: 423,
         TooManyRequests: 429,
         UnavailableLegal: 451,
