@@ -9,6 +9,7 @@ const RememberMeAuthentication = require('./remember-me');
 
 const db = require('../db/models');
 const MUser = db.User;
+const MDevice = db.Device;
 
 debug('Setting up Local Auth Strategy ...');
 passport.use(new LocalStrategy(
@@ -23,7 +24,7 @@ passport.use(new LocalStrategy(
                 plain: true
             }).then((user) => {
                 if (!user) {
-                    debug('Could not authenticate user %s (not found or wrong password)');
+                    debug('Could not authenticate user %s (not found or wrong password)', username);
                     return done(null, false);
                 }
                 debug('Authenticated %s', username);
@@ -67,6 +68,40 @@ RememberMeAuthentication.whenEnabled(() => {
 }, () => {
     debug('Remember Me Strategy is disabled.');
 });
+
+passport.use(new LocalApiKeyStrategy(
+    (apiKey, done) => {
+        const logKey = `{${apiKey.substr(0, 6)}..}`;
+        MDevice.findOne({
+            where: { key: apiKey }
+        }).then((device) => {
+            if (device) {
+                MUser.findOne({
+                    where: { id: device.owner_id }
+                }).then((user) => {
+                    if (user) {
+                        debug('Authenticated %s with API key', user.username);
+                        return done(null, user);
+                    } else {
+                        debug('Something went wrong here... we couldn\'t find the user to the provided API key %s', apiKey);
+                        return done(null, false);
+                    }
+                }).catch((err) => {
+                    debug('Failed to authenticate with API key %s', logKey);
+                    console.error(err);
+                    return done(err);
+                });
+            } else {
+                debug('Could not authenticate with API key %s', logKey);
+                return done(null, false);
+            }
+        }).catch((err) => {
+            debug('Failed to authenticate with API key %s', logKey);
+            console.error(err);
+            return done(err);
+        });
+    }
+));
 
 debug('Setting up (De)Serialization ...');
 passport.serializeUser((user, callback) => {

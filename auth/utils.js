@@ -2,6 +2,7 @@ const Base64 = require('js-base64').Base64;
 const sha256 = require('sha256');
 const RouteUtils = require('../utils/route-utils');
 const ensure = require('connect-ensure-login');
+const passport = require('passport');
 
 const db = require('../db/models');
 const MUser = db.User;
@@ -17,6 +18,12 @@ const AuthUtils = {
     },
     ensureLoggedIn: () => {
         return ensure.ensureLoggedIn(RouteUtils.getRoute("/auth/login"))
+    },
+    loginWithApiKey: () => {
+        return passport.authenticate('localapikey', {
+            session: false,
+            failureRedirect: RouteUtils.getRoute("/auth/api/failed")
+        })
     },
     findUserByUsernameAndPassword: (username, password) => {
         return MUser.findOne({
