@@ -1,19 +1,16 @@
 const debug = require('debug')('PinMyPi:Routes:index');
 const config = require('config');
 const HandleRender = require('../utils/handlebar-renderer');
+const ensureLoggedIn = require('../auth/utils').ensureLoggedIn;
 
 const router = require('express').Router();
 
-router.get('/', (req, res, next) => {
-    debug(`Requested from ${req.ip}`);
-    HandleRender.render(res, 'index', 'Home');
-});
-
-router.get('/json', (req, res) => {
-    res.json({
-        "Hello": "World"
+router.get('/',
+    ensureLoggedIn(),
+    (req, res, next) => {
+        debug(`Requested from ${req.ip}`);
+        HandleRender.render(res, 'index', 'Home');
     });
-});
 
 if (config.has('server.enableDebugRoutes') && config.get('server.enableDebugRoutes')) {
     debug('Debug Routes have been enabled!');
