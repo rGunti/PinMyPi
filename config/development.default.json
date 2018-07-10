@@ -1,0 +1,19 @@
+{
+    "server": {
+        "enableDebugRoutes": true,
+        "showTraces": true,
+        "rootDir": ""
+    },
+    "session": {
+        "secret": "REPLACE_ME"
+    },
+    "auth": {
+        "rememberMe": {
+            "enabled": true,
+            "maxAge": 604800000
+        }
+    },
+    "maps": {
+        "apiKey": "REPLACE_ME"
+    }
+}
