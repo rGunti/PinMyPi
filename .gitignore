@@ -64,5 +64,6 @@ typings/
 .vscode/*.sql
 
 # Ignore Config Folder
-config/*.json
-!config/*.default.json
+config/databases.json
+config/development.json
+#!config/*.default.json
