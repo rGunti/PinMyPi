@@ -5,3 +5,6 @@
 .container-fluid:first-of-type {
     padding-top: 20px;
 }
+#mapTarget {
+    height: 100%;
+}

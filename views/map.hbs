@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            <h3>Devices</h3>
+        </div>
+        <div class="col-lg-10" style="height:80vh;">
+            <div id="mapTarget"></div>
+        </div>
+    </div>
+</div>
+<script src="{{ROOT_DIR}}/public/js/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{getConfig 'maps.apiKey'}}&callback=initMap" async defer></script>
