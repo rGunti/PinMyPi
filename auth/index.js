@@ -76,7 +76,7 @@ passport.use(new LocalApiKeyStrategy(
             where: { key: apiKey }
         }).then((device) => {
             if (device) {
-                MUser.findOne({
+                return MUser.findOne({
                     where: { id: device.owner_id }
                 }).then((user) => {
                     if (user) {
