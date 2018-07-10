@@ -1,4 +1,4 @@
-const debug = require('debug')('PinMyPi:Routes:user');
+const debug = require('debug')('PinMyPi:Routes:devices');
 const config = require('config');
 const HandleRender = require('../utils/handlebar-renderer');
 const auth = require('../auth');
