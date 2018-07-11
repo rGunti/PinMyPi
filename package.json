@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./www.js"
+    "start": "node ./www.js",
+    "migrate-db": "node_modules/.bin/sequelize db:migrate",
+    "seed-db": "node_modules/.bin/sequelize db:seed:all"
   },
   "repository": "https://github.com/rGunti/PinMyPi.git",
   "keywords": [
