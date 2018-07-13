@@ -1,9 +1,18 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <h3>Devices</h3>
+            <div class="list-group" id="deviceList">
+                {{#each data.devices}}
+                <a class="list-group-item list-group-item-action" href="#{{this.id}}" data-id="{{this.id}}">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{this.name}}</h5>
+                    </div>
+                </a>
+                {{/each}}
+            </div>
         </div>
-        <div class="col-lg-10" style="height:80vh;">
+        <div class="col-lg-9" style="height:80vh;">
             <div id="mapTarget"></div>
         </div>
     </div>

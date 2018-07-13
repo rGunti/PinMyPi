@@ -25,6 +25,7 @@
   "bugs": "https://github.com/rGunti/PinMyPi/issues",
   "homepage": "https://github.com/rGunti/PinMyPi#readme",
   "dependencies": {
+    "async": "^2.6.1",
     "body-parser": "1.18.3",
     "bootstrap": "4.1.1",
     "config": "1.30.0",
