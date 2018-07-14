@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand"
-       href="{{ROOT_DIR}}/">
+       href="{{getPath '/'}}">
         <i class="fa fa-fw fa-map-pin"></i>
         PinMyPi
     </a>
@@ -21,11 +21,11 @@
             {{#isLoggedIn}}
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{ROOT_DIR}}/devices">Devices</a>
+                   href="{{getPath '/devices'}}">Devices</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{ROOT_DIR}}/map">Map</a>
+                   href="{{getPath '/map'}}">Map</a>
             </li>
             {{/isLoggedIn}}
         </ul>
@@ -33,18 +33,18 @@
             {{#isLoggedIn}}
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{ROOT_DIR}}/me">
+                   href="{{getPath '/me'}}">
                    <b>{{userData 'username'}}</b>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{ROOT_DIR}}/auth/logout">Logout</a>
+                   href="{{getPath '/auth/logout'}}">Logout</a>
             </li>
             {{else}}
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{ROOT_DIR}}/auth/login">Login</a>
+                   href="{{getPath '/auth/login'}}">Login</a>
             </li>
             {{/isLoggedIn}}
         </ul>

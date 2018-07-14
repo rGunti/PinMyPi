@@ -1,6 +1,7 @@
 const debug = require('debug')('PinMyPi:HandlebarHelpers');
 const package = require(__dirname + '/../package.json');
 const config = require('config');
+const RouteUtils = require('../utils/route-utils');
 
 const HandlebarHelpers = {
     package: package,
@@ -53,6 +54,12 @@ const HandlebarHelpers = {
         },
         printOrElse: (obj, defaultValue, options) => {
             return obj || defaultValue;
+        },
+        getPath: (path, options) => {
+            return RouteUtils.getRoute(path)
+        },
+        basePath: (options) => {
+            return RouteUtils.getBasePath()
         }
     },
     roundNumber: (num, decimals) => {
