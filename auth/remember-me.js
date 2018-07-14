@@ -11,6 +11,7 @@ const RememberMeAuthentication = {
         return done();
     },
     consumeToken: (token, done) => {
+        if (!token) return (done) ? done(null, null) : null;
         debug('Consuming Token [%s..] ...', token.substr(0, 6));
         var uid = rememberMeTokens[token];
         delete rememberMeTokens[token];
