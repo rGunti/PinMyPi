@@ -1,6 +1,6 @@
 {
   "name": "pinmypi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PinMyPi is a web service that receives GPS locations and lists them, similar to \"Find My iPhone\", but for your Raspberry Pis (and anything else you want).",
   "main": "index.js",
   "scripts": {
