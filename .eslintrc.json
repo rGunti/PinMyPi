@@ -13,16 +13,18 @@
             4
         ],
         "linebreak-style": [
-            "error",
+            "off",
             "unix"
         ],
         "quotes": [
-            "error",
+            "warn",
             "double"
         ],
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-unused-vars": "warn",
+        "no-console": "off"
     }
 }
